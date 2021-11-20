@@ -1,0 +1,4 @@
+#Sat Oct 02 14:46:22 EDT 2021
+base.0=C\:\\Users\\Ariel\\Desktop\\ZTDS2C\\android\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

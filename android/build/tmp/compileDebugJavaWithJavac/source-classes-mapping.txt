@@ -1,0 +1,10 @@
+com/main/BuildConfig.java
+ com.main.BuildConfig
+com/main/AndroidLauncher.java
+ com.main.AndroidLauncher
+com/main/R.java
+ com.main.R
+ com.main.R$color
+ com.main.R$drawable
+ com.main.R$string
+ com.main.R$style
