@@ -7,8 +7,15 @@ public class Tables {
     static HashMap<String, Texture> cannons = new HashMap<String, Texture>();
     static HashMap<String, Texture> buttons = new HashMap<String, Texture>();
     static HashMap<String, Texture> zombies = new HashMap<String, Texture>();
-
+    static HashMap<String, Texture> resources = new HashMap<String, Texture>();
+    static HashMap<String, Integer> values = new HashMap<String, Integer>();
     static void init(){
+        values.put("columns_boom",7);
+        values.put("columns_click",4);
+        values.put("columns_laser",16);
+        values.put("columns_speedy",6);
+        resources.put("effect_click",Resources.click);
+        resources.put("effect_boom",Resources.boom);
         cannons.put("fire", Resources.cannon_fire);
         cannons.put("double", Resources.cannon_double);
         cannons.put("super", Resources.cannon_super);

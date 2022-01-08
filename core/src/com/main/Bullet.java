@@ -1,6 +1,7 @@
 package com.main;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Bullet {
     int x, y, w, h;
@@ -22,6 +23,7 @@ public class Bullet {
     void update(){
         x += Math.cos(angle) * speed;
         y += Math.sin(angle) * speed;
+        checkcollisions();
     }
 
     float calcangle(){
@@ -33,4 +35,13 @@ public class Bullet {
     void draw(SpriteBatch batch){
         batch.draw(Resources.bullet, x, y);
     }
+
+    void checkcollisions(){
+        for (Zombie z:Main.zombies)
+            if (z.hitbox().contains(hitbox())){
+                z.hp--;
+                active=false;
+            }
+    }
+    Rectangle hitbox(){return new Rectangle(x,y,w,h);}
 }

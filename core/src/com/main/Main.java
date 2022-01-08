@@ -26,6 +26,7 @@ public class Main extends ApplicationAdapter {
 	static ArrayList<Cannon> cannons = new ArrayList<Cannon>();
 	static ArrayList<Button> buttons = new ArrayList<Button>();
 	static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	static ArrayList<EFFECT> effects = new ArrayList<EFFECT>();
 
 	@Override
 	public void create () {
@@ -39,10 +40,12 @@ public class Main extends ApplicationAdapter {
 		update();
 		batch.begin();
 		batch.draw(Resources.bg, 0, 0);
+		UI.draw(batch);
 		for(Zombie z : zombies) z.draw(batch);
 		for(Cannon c : cannons) c.draw(batch);
 		for(Button b : buttons) b.draw(batch);
 		for(Bullet b : bullets) b.draw(batch);
+		for(EFFECT e : effects) e.draw(batch);
 		batch.end();
 	}
 
@@ -61,24 +64,46 @@ public class Main extends ApplicationAdapter {
 		housekeeping();
 	}
 
-	void housekeeping(){
-		for(Zombie z : zombies) if(!z.active) { zombies.remove(z); break; }
+	void housekeeping() {
+
+		for (Zombie z : zombies)
+			if (!z.active) {
+				zombies.remove(z);
+				break;
+
+			}
+		for (EFFECT e : effects)
+			if (!e.active) {
+				effects.remove(e);
+				break;
+			}
 	}
+
 
 	void tap(){
 		if(Gdx.input.justTouched()){
 			int x = Gdx.input.getX(), y = Gdx.graphics.getHeight() - Gdx.input.getY();
+			effects.add(new EFFECT("boom",x,y));
 
 			for(Button b: buttons){
+				if(!b.t.hidden&&b.t.hitbox().contains(x,y))return;
 				if(b.gethitbox().contains(x, y)){
-					if(b.locked) b.locked = false;
+
+					if(b.locked){
+						if (b.t.hidden){hidett(); b.t.hidden=false;}
+						else { hidett();b.locked=false;}
+					}
+
+
 					else {
 						deselect();
+						hidett();
 						b.selected = true;
 						current_type = b.type;
 					}
 					return;
 				}
+				if(!b.t.hidden&&!b.t.hitbox().contains(x,y)){b.t.hidden=true;return;}
 			}
 
 			//leave cannons last
@@ -86,12 +111,15 @@ public class Main extends ApplicationAdapter {
 			if(buildable(x, y)) cannons.add(new Cannon(current_type, x, y));
 		}
 	}
+	void hidett() {for(Button b: buttons) b.t.hidden=true;}
 
+	boolean anybutton(int x, int y){
+		for (Button b:buttons)if(b.gethitbox().contains(x,y)) return true;
+		return false;
+	}
 	boolean buildable(int x, int y){
-		//add your logic to return true if a cannon can be placed
-		//y range is 0->200 and 300->500
-		//x range is 0->1000
-		return true;
+		return ((y>0&&y<200)||(y>300&&y<500)) && x<1000;
+
 	}
 
 	void deselect(){
@@ -100,11 +128,14 @@ public class Main extends ApplicationAdapter {
 
 	void setup(){
 		Tables.init();
-		buttons.add(new Button("bbb", 25 + buttons.size() * 75, 525));
-		buttons.add(new Button("fire", 25 + buttons.size() * 75, 525));
-		buttons.add(new Button("super", 25 + buttons.size() * 75, 525));
-		buttons.add(new Button("double", 25 + buttons.size() * 75, 525));
-		buttons.add(new Button("laser", 25 + buttons.size() * 75, 525));
+		current_type="cannon";
+		buttons.add(new Button("bbb", 225 + buttons.size() * 75, 525));
+		buttons.get(buttons.size()-1).locked=false;
+		buttons.get(buttons.size()-1).locked=true;
+		buttons.add(new Button("fire", 225 + buttons.size() * 75, 525));
+		buttons.add(new Button("super", 225 + buttons.size() * 75, 525));
+		buttons.add(new Button("double", 225 + buttons.size() * 75, 525));
+		buttons.add(new Button("laser", 225 + buttons.size() * 75, 525));
 	}
 
 	void spawn_zombies() {
