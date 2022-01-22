@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
+      <module name="ZombieTD.android" target="11" />
       <module name="ztd_s2c.android" target="11" />
       <module name="ZTDS2C.android" target="11" />
     </bytecodeTargetLevel>

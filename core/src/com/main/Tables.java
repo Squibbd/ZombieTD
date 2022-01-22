@@ -27,6 +27,9 @@ public class Tables {
         buttons.put("super", Resources.button_cannon_super);
         buttons.put("laser", Resources.button_cannon_laser);
         buttons.put("mounted", Resources.button_cannon_mounted);
+        buttons.put("wall", Resources.button_wall);
+        buttons.put("play", Resources.play);
+        buttons.put("pause", Resources.pause);
 
         zombies.put("dif", Resources.zombie_dif);
         zombies.put("fast", Resources.zombie_fast);

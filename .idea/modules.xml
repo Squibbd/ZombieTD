@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ztd_s2c.iml" filepath="$PROJECT_DIR$/.idea/modules/ztd_s2c.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/ztd_s2c.android.iml" filepath="$PROJECT_DIR$/.idea/modules/android/ztd_s2c.android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/ztd_s2c.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/ztd_s2c.core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/desktop/ztd_s2c.desktop.iml" filepath="$PROJECT_DIR$/.idea/modules/desktop/ztd_s2c.desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ZombieTD.iml" filepath="$PROJECT_DIR$/.idea/modules/ZombieTD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/ZombieTD.android.iml" filepath="$PROJECT_DIR$/.idea/modules/android/ZombieTD.android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/ZombieTD.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/ZombieTD.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/desktop/ZombieTD.desktop.iml" filepath="$PROJECT_DIR$/.idea/modules/desktop/ZombieTD.desktop.iml" />
     </modules>
   </component>
 </project>

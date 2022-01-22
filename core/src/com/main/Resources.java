@@ -20,6 +20,10 @@ public class Resources {
     static Texture tooltip_bg = new Texture(Gdx.files.internal("ttbg.png"));
     static Texture red_bar = new Texture(Gdx.files.internal("red_bar.png"));
     static Texture button_close = new Texture(Gdx.files.internal("x.png"));
+    static Texture wall = new Texture(Gdx.files.internal("Wall.png"));
+    static Texture play = new Texture(Gdx.files.internal("play.png"));
+    static Texture pause = new Texture(Gdx.files.internal("pause.png"));
+    static Texture button_wall = new Texture(Gdx.files.internal("WallIcon.png"));
 
 
 

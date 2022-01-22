@@ -17,6 +17,7 @@ public class Main extends ApplicationAdapter {
 	// Game Variables
 	SpriteBatch batch;
 	static Random r = new Random();
+	static boolean paused = false;
 
 	// Control Variables
 	static String current_type = "ccc";
@@ -27,6 +28,7 @@ public class Main extends ApplicationAdapter {
 	static ArrayList<Button> buttons = new ArrayList<Button>();
 	static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	static ArrayList<EFFECT> effects = new ArrayList<EFFECT>();
+	static ArrayList<Wall> walls = new ArrayList<Wall>();
 
 	@Override
 	public void create () {
@@ -41,6 +43,7 @@ public class Main extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(Resources.bg, 0, 0);
 		UI.draw(batch);
+		for(Wall w : walls) w.draw(batch);
 		for(Zombie z : zombies) z.draw(batch);
 		for(Cannon c : cannons) c.draw(batch);
 		for(Button b : buttons) b.draw(batch);
@@ -55,10 +58,13 @@ public class Main extends ApplicationAdapter {
 		spawn_zombies();
 
 		//loops
-		for(Zombie z : zombies) z.update();
-		for(Cannon c : cannons) c.update();
-		for(Button b : buttons) b.update();
-		for(Bullet b : bullets) b.update();
+		if(!paused){
+			for(Zombie z : zombies) z.update();
+			for(Cannon c : cannons) c.update();
+			for(Button b : buttons) b.update();
+			for(Bullet b : bullets) b.update();
+			for(Wall w : walls) w.update();
+		}
 
 		//remove inactive objects
 		housekeeping();
@@ -75,6 +81,11 @@ public class Main extends ApplicationAdapter {
 		for (EFFECT e : effects)
 			if (!e.active) {
 				effects.remove(e);
+				break;
+			}
+		for (Wall w : walls)
+			if (!w.active) {
+				effects.remove(w);
 				break;
 			}
 	}
@@ -96,6 +107,15 @@ public class Main extends ApplicationAdapter {
 
 
 					else {
+						if(b.type.equals("wall") || b.type.equals("mounted")){
+							if(walls.size() < 5)walls.add(new Wall(walls.size() * Resources.wall.getWidth(), 0, b.type.equals("mounted")));
+							return;
+						}
+						if(b.type.equals("pause") || b.type.equals("play")){
+							paused = !paused;
+							b.type = paused ? "play" : "pause";
+							return;
+						}
 						deselect();
 						hidett();
 						b.selected = true;
@@ -136,6 +156,14 @@ public class Main extends ApplicationAdapter {
 		buttons.add(new Button("super", 225 + buttons.size() * 75, 525));
 		buttons.add(new Button("double", 225 + buttons.size() * 75, 525));
 		buttons.add(new Button("laser", 225 + buttons.size() * 75, 525));
+		buttons.add(new Button("wall", 225 + buttons.size() * 75, 525));
+		buttons.get(buttons.size() - 1).locked = false;
+		buttons.get(buttons.size() - 1).selected = false;
+		buttons.add(new Button("mounted", 225 + buttons.size() * 75, 525));
+
+		buttons.add(new Button("pause", 1024 - 75, 525));
+		buttons.get(buttons.size() - 1).locked = false;
+		buttons.get(buttons.size() - 1).selected = false;
 	}
 
 	void spawn_zombies() {
